@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace CollectionDataBinding
 {
@@ -20,28 +21,28 @@ namespace CollectionDataBinding
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<User> users;
+        private ObservableCollection<User> users;
         public MainWindow()
         {
             InitializeComponent();
             LoadUsers();
+            DataContext = users;
         }
         private void LoadUsers()
         {
-            users = new List<User>(); 
+            users = new ObservableCollection<User>(); 
             users.Add(new User() { Name = "Peter Parker" }); 
             users.Add(new User() { Name = "Tony Stark" }); 
             users.Add(new User() { Name = "Natasha Romanoff" }); 
-            userslistbox.ItemsSource = users;
+            //userslistbox.ItemsSource = users;
         }
 
         private void adduserbutton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(usertextbox.Text)) 
-            {
-                User user = new User() { Name = usertextbox.Text }; 
-                users.Add(user); userslistbox.SelectedItem = user; UpdateView(); 
-            }
+            User user = new User() 
+            { Name = "Nuevo usuario" }; 
+            users.Add(user); 
+            userslistbox.SelectedItem = user; UpdateView();
         }      
         private void changeuserbutton_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +56,8 @@ namespace CollectionDataBinding
         {
             if (userslistbox.SelectedItem != null) 
             { users.Remove(userslistbox.SelectedItem as User); 
-                usertextbox.Text = ""; UpdateView(); }
+                //usertextbox.Text = "";
+                UpdateView(); }
         }
         private void UpdateView()
         {

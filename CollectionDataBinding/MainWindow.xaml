@@ -17,9 +17,9 @@
         <Border DockPanel.Dock="Top" Margin="0,0,0,4" BorderThickness="2" BorderBrush="BlueViolet">
             <DockPanel>
                 <Label Content="Usuraio" Margin="2"/>
-                <TextBox x:Name="usertextbox" Margin="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="usertextbox" Margin="2" VerticalAlignment="Center" Text="{Binding Name}"/>
             </DockPanel>
         </Border>
-        <ListBox x:Name="userslistbox" DisplayMemberPath="Name" SelectionMode="Single" SelectionChanged="userslistbox_SelectionChanged"/>
+        <ListBox x:Name="userslistbox" DisplayMemberPath="Name" SelectionMode="Single" SelectionChanged="userslistbox_SelectionChanged" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}"/>
     </DockPanel>
 </Window>
